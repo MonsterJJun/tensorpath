@@ -8,11 +8,31 @@
 - Chromium browser regression: selection, call hierarchy, replay, search, gradients, comparison, invalid input, literal hostile markup, no HTTP(S) requests, mobile viewport. The managed browser blocked `file://`; generated HTML was loaded via `set_content` instead.
 - Original schema v1 and existing six MCP tool signatures retained. Two new tool wrappers and their underlying functions were implemented; stdio round-trip test includes new endpoints.
 
-## Not verified
+## macOS Integration Verification
 
-- The MCP SDK is unavailable in this environment. Real stdio test is skipped; `doctor --protocol` is provided for local protocol verification. Actual Hermes integration, agent tool selection, approval behavior, skill compliance, and macOS/Windows/CUDA execution are not validated. CI is provided but not run on GitHub here.
-- Static discovery is heuristic and bounded; no arbitrary project execution occurs in MCP. The recording skill asks the agent to propose a minimal capture and obtain approval, then use its host terminal if available. This is an instruction workflow, not a sandbox or a fully autonomous capture engine. Forward-only does not prevent custom model side effects or mutable buffers.
-- No new operator-level dataflow, full autograd graph, MLX backend, or raw activation collection. The v0.2 Explorer is unchanged except for output-path hardening. No blanket security, performance or cross-platform guarantee.
-- No PyPI publication, GitHub push, or installation on the user's Mac. MIT license inherited. Use private, stable project, trace and report directories; setup is backup-first and best-effort rollback, not a transaction against concurrent filesystem editors.
+Date: 2026-11-25
+
+Environment:
+- MacBook Air M5, 32GB unified memory
+- macOS / Apple Silicon
+- Hermes Agent
+- LM Studio
+- Shared Python virtual environment
+
+Results:
+- Pytest: 45 tests passed
+- MCP stdio protocol: passed
+- MCP tools: 8 discovered
+- Sample traces: 6 available
+- Hermes skill activation: user-verified
+- Agent tool calling: user-verified
+- Interactive HTML generation: user-verified
+
+Remaining limitations:
+- Large-scale model compatibility
+- Distributed training
+- Operator-level dataflow tracing
+- Quantitative agent performance evaluation
+
 
 Historical checks: [v0.2.0](docs/verification-v0.2.0.md), [v0.1.0](docs/verification-v0.1.0.md).
